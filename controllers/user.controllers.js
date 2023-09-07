@@ -2,10 +2,15 @@ const {v4: uuidv4} = require("uuid");
 const User = require("../models/user.model");
 
 
-const getAllUsers = (req,res) =>{
-    res.status(200).json({
-        message: "all users",
-    })
+const getAllUsers = async (req,res) =>{
+
+   try{
+    const users = await User.find();
+    res.status(200).json(users)
+   }
+   catch{
+    res.status(500).send(error.message)
+   }
 };
 
 const getOneUser = (req,res) =>{
